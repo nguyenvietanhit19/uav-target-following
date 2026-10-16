@@ -134,7 +134,7 @@ yaw_rate = K_YAW * sai_số_chuẩn_hóa
 - `sai_số_chuẩn_hóa`: số từ -1 đến +1 vừa tính ở trên.
 - `K_YAW`: **hệ số do bạn tự chọn**, đơn vị độ/giây.
 
-**Ý nghĩa của K_YAW:** nếu người ở sát mép ảnh (sai số chuẩn hóa = ±1) thì drone xoay `K_YAW` độ/giây. Vì sai số chuẩn hóa chỉ nằm trong -1 đến +1 nên `K_YAW` cũng chính là **tốc độ xoay lớn nhất** có thể xảy ra. (K_YAW là một hệ số tỉ lệ, cùng họ với hệ số Kp của bộ điều khiển P sẽ học sau.)
+**Ý nghĩa của K_YAW:** nếu người ở sát mép ảnh (sai số chuẩn hóa = ±1) thì drone xoay `K_YAW` độ/giây. Vì sai số chuẩn hóa chỉ nằm trong -1 đến +1 nên `K_YAW` cũng chính là **tốc độ xoay lớn nhất** có thể xảy ra. (K_YAW là một hệ số tỉ lệ, cùng họ với hệ số Kp; xem [file 05](05_bo_dieu_khien_p.md), mục 4.4 để so sánh hai hệ số.)
 
 **Ví dụ: cùng một vị trí người (x = 480, sai số chuẩn hóa = 0,5), đổi K_YAW:**
 

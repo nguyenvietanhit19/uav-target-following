@@ -14,10 +14,11 @@
 | [docs/02_script_va_thi_nghiem.md](docs/02_script_va_thi_nghiem.md) | Script MAVSDK, kết quả thí nghiệm A và B, vì sao thiếu quãng đường |
 | [docs/03_dieu_khien_yaw_tu_anh.md](docs/03_dieu_khien_yaw_tu_anh.md) | `tâm_box_x`, sai số chuẩn hóa, `K_YAW` |
 | [docs/04_bang_thuat_ngu.md](docs/04_bang_thuat_ngu.md) | Bảng thuật ngữ đã học |
+| [docs/05_bo_dieu_khien_p.md](docs/05_bo_dieu_khien_p.md) | Bộ điều khiển P: Kp, Δt, ví dụ Δt = 1 và 0,1 với Kp = 0,5 / 1,5 / 2, độ trễ, feedforward, giữ khoảng cách mong muốn, hai chiều Bắc/Đông và độ cao, khoảng cách ngang (Pytago) (có mục lục) |
 
 **Chưa học:** các chủ đề do claude.ai liệt kê sẵn (toán phụ trợ, thị giác, Kalman, đám đông) nằm ở [docs/chua_hoc/](docs/chua_hoc/README.md). Sẽ chuyển sang bảng trên khi học xong.
 
-**Đang học tiếp:** bộ điều khiển P (chưa có file, sẽ viết khi bắt đầu).
+**Đang học tiếp:** viết `buoc4_p_controller.py` (bước 2 của lộ trình) để thử bộ điều khiển P trên sim.
 
 ---
 

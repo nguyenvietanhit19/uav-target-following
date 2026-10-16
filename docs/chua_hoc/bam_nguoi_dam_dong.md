@@ -1,6 +1,6 @@
 # Bám người trong đám đông và hai người giống hệt nhau
 
-> **Chưa học.** Nội dung này do claude.ai soạn sẵn, người học chưa tìm hiểu. Khi dạy, hãy giải thích lại từ đầu theo quy tắc ở CLAUDE.md mục 0. Học xong và đã hỏi lại thì chuyển sang thư mục `docs/` và bổ sung phần Hỏi và đáp.
+> **Chưa học.** Nội dung này do claude.ai soạn sẵn, người học chưa tìm hiểu. Khi dạy, hãy giải thích lại từ đầu theo cách người học đang quen (thuật ngữ giải thích ngay lần đầu, ví dụ số từng bước). Học xong và đã hỏi lại thì chuyển sang thư mục `docs/` và bổ sung phần Hỏi và đáp.
 > [Về kho chưa học](README.md)
 
 ## 1. Bám người trong đám đông (chống nhảy ID)

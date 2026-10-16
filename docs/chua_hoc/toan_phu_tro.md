@@ -1,11 +1,13 @@
 # Toán phụ trợ: Pytago, atan2, phép chia lấy dư
 
-> **Chưa học.** Nội dung này do claude.ai soạn sẵn, người học chưa tìm hiểu. Khi dạy, hãy giải thích lại từ đầu theo quy tắc ở CLAUDE.md mục 0. Học xong và đã hỏi lại thì chuyển sang thư mục `docs/` và bổ sung phần Hỏi và đáp.
+> **Chưa học.** Nội dung này do claude.ai soạn sẵn, người học chưa tìm hiểu. Khi dạy, hãy giải thích lại từ đầu theo cách người học đang quen (thuật ngữ giải thích ngay lần đầu, ví dụ số từng bước). Học xong và đã hỏi lại thì chuyển sang thư mục `docs/` và bổ sung phần Hỏi và đáp.
 > [Về kho chưa học](README.md)
 
 ## 1. Toán phụ trợ: Pytago, atan2, phép chia lấy dư `%`
 
 ### 1.1. Khoảng cách trên mặt phẳng (Pytago)
+
+> **Đã học** phần Pytago (khoảng cách ngang `√(Δbắc² + Δđông²)`): xem [file 05](../05_bo_dieu_khien_p.md), mục 9.1 đến 9.3. Mục này giữ lại để tham khảo.
 
 ```
 khoảng_cách = √(Δbắc² + Δđông²)

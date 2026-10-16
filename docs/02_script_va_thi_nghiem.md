@@ -6,7 +6,7 @@
 
 ### 1.1. Môi trường đang dùng
 
-- Chạy trên Windows, thư mục `D:\Intern iVista\UAV\mavsdk` (có venv `.venv`).
+- Chạy trên Windows, script nằm trong thư mục `scripts/` của repo, dùng môi trường ảo `.venv` ở thư mục gốc của repo (cài từ `requirements.txt`).
 - MAVSDK 4.x có API mới làm hỏng script cũ nên đã chuyển sang gói **`mavsdk_grpc`**.
 - Kết nối tới sim qua `udpin://0.0.0.0:14540` (QGroundControl dùng cổng 14550 nên hai bên không giành nhau).
 
@@ -110,7 +110,7 @@ Mũi xoay thêm:     -3.8°
 
 - **Bắc, đông** là vị trí so với điểm Home, tính bằng mét. Bắc âm = lệch về phía Nam. Đông dương = đã đi về phía Đông.
 - **Hai dòng "Sau khi gửi lệnh" và "Sau khi dừng hẳn"** đo ở hai thời điểm khác nhau. Drone đang chạy thì không dừng ngay mà trượt thêm một đoạn khi phanh: 2,01 - 1,44 = **0,57 m**. (Số ở dòng 1 còn có thể hơi cũ vì telemetry cập nhật chậm.)
-- **Quãng đường** là khoảng cách thẳng từ chỗ bắt đầu đến chỗ dừng (Pytago, chi tiết ở [kho chưa học](chua_hoc/toan_phu_tro.md), mục 1.1): √(0,12² + 2,01²) = √4,0545 ≈ **2,01 m**.
+- **Quãng đường** là khoảng cách thẳng từ chỗ bắt đầu đến chỗ dừng (Pytago, giải thích ở [file 05](05_bo_dieu_khien_p.md), mục 9.3): √(0,12² + 2,01²) = √4,0545 ≈ **2,01 m**.
 - **Thay đổi** = vị trí sau - vị trí trước. Đông: 2,01 - 0 = +2,01 m. Bắc: -0,11 m (trôi nhẹ về Nam).
   - Vì sao -0,11 mà không phải -0,12: do làm tròn khi in (ví dụ vị trí "trước" thực ra là -0,004, in ra thành -0,00).
 - **Mũi xoay thêm** = `(yaw_sau - yaw_trước + 180) % 360 - 180` = (92,0 - 95,9 + 180) % 360 - 180 = 176,1 - 180 = **-3,9°** (in -3,8° vì số thực chưa làm tròn). Dấu âm = xoay nhẹ sang trái.
