@@ -1,0 +1,4 @@
+# Script chạy trong WSL/Linux phải dùng kiểu xuống dòng LF, nếu không bash sẽ báo lỗi.
+*.sh text eol=lf
+*.sdf text eol=lf
+*.bat text eol=crlf

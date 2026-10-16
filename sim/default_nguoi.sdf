@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  World "default" của PX4 + Gazebo, thêm MỘT NGƯỜI ĐI BỘ THẲNG (actor có hoạt ảnh bước chân).
+
+  Cách dùng: ghi đè file /opt/px4-gazebo/share/gz/worlds/default.sdf trong container
+  (xem chay_gpu_nguoi.sh). Giữ nguyên tên world là "default" nên các lệnh
+  /world/default/... và các script Python hiện tại vẫn dùng được.
+
+  Phần thêm vào so với world gốc: khối <actor> ở cuối file.
+  Tọa độ Gazebo là ENU: x = đông, y = bắc, z = lên. Drone xuất phát ở khoảng (0, 0).
+-->
+<sdf version="1.9">
+  <world name="default">
+    <physics type="ode">
+      <max_step_size>0.004</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+      <real_time_update_rate>250</real_time_update_rate>
+    </physics>
+    <gravity>0 0 -9.8</gravity>
+    <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
+    <atmosphere type="adiabatic"/>
+    <scene>
+      <grid>false</grid>
+      <ambient>0.4 0.4 0.4 1</ambient>
+      <background>0.7 0.7 0.7 1</background>
+      <shadows>true</shadows>
+    </scene>
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>1 1</size>
+            </plane>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>500 500</size>
+            </plane>
+          </geometry>
+          <material>
+            <ambient>0.8 0.8 0.8 1</ambient>
+            <diffuse>0.8 0.8 0.8 1</diffuse>
+            <specular>0.8 0.8 0.8 1</specular>
+          </material>
+        </visual>
+        <pose>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>0 0 0 0 -0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <light name="sunUTC" type="directional">
+      <pose>0 0 500 0 -0 0</pose>
+      <cast_shadows>true</cast_shadows>
+      <intensity>1</intensity>
+      <direction>0.001 0.625 -0.78</direction>
+      <diffuse>0.904 0.904 0.904 1</diffuse>
+      <specular>0.271 0.271 0.271 1</specular>
+      <attenuation>
+        <range>2000</range>
+        <linear>0</linear>
+        <constant>1</constant>
+        <quadratic>0</quadratic>
+      </attenuation>
+      <spot>
+        <inner_angle>0</inner_angle>
+        <outer_angle>0</outer_angle>
+        <falloff>0</falloff>
+      </spot>
+    </light>
+    <spherical_coordinates>
+      <surface_model>EARTH_WGS84</surface_model>
+      <world_frame_orientation>ENU</world_frame_orientation>
+      <latitude_deg>47.397971057728974</latitude_deg>
+      <longitude_deg> 8.546163739800146</longitude_deg>
+      <elevation>0</elevation>
+    </spherical_coordinates>
+
+    <!--
+      NGƯỜI ĐI BỘ: đi thẳng về phía Bắc (y tăng) từ (0, 10) đến (0, 310) trong 300 giây = 1 m/s.
+      Thời gian trong <script> tính theo đồng hồ SIM (nên không bị RTF làm lệch).
+      Hướng Bắc đã được xác nhận bằng mắt trong Gazebo (người đi cùng phía với trục y).
+      Script Python (duong_di_nguoi.py) ĐỌC CHÍNH FILE NÀY để tính vị trí người, nên khi sửa
+      đường đi ở đây thì nhớ chép file sang ~/phao và khởi động lại sim.
+      Mesh và hoạt ảnh lấy từ Gazebo Fuel (tải lần đầu, sau đó nằm trong cache được mount).
+      - delay_start: chờ bao nhiêu giây sim sau khi world bắt đầu thì người mới bắt đầu đi.
+      - loop true: hết đường (sau 305 giây sim) thì người quay lại điểm đầu và đi lại, nên làm
+        thí nghiệm trong 300 giây đầu của sim. (Từng thử loop false thì người đứng yên không đi,
+        nguyên nhân chưa rõ, nên giữ loop true như bản đã chạy được lúc đầu.)
+      - pose "x y z roll pitch yaw": z = 1.0 là độ cao gốc của bộ xương (theo model mẫu);
+        yaw = 1.5708 rad (90 độ) xoay mặt người từ hướng +x sang hướng +y (Bắc).
+        Nếu người đi "ngang" hoặc đi lùi thì chỉnh yaw (ví dụ -1.5708 hoặc 0 hoặc 3.1416).
+      - interpolate_x true: để hoạt ảnh bước chân khớp với quãng đường đi, đỡ bị "trượt chân".
+    -->
+    <actor name="muc_tieu_nguoi">
+      <skin>
+        <filename>https://fuel.gazebosim.org/1.0/mingfei/models/actor/1/files/meshes/walk.dae</filename>
+        <scale>1.0</scale>
+      </skin>
+      <animation name="walk">
+        <filename>https://fuel.gazebosim.org/1.0/mingfei/models/actor/1/files/meshes/walk.dae</filename>
+        <scale>1.0</scale>
+        <interpolate_x>true</interpolate_x>
+      </animation>
+      <script>
+        <loop>true</loop>
+        <delay_start>5.0</delay_start>
+        <auto_start>true</auto_start>
+        <trajectory id="0" type="walk">
+          <waypoint>
+            <time>0</time>
+            <pose>0 10 1.0 0 0 1.5708</pose>
+          </waypoint>
+          <waypoint>
+            <time>300</time>
+            <pose>0 310 1.0 0 0 1.5708</pose>
+          </waypoint>
+        </trajectory>
+      </script>
+    </actor>
+  </world>
+</sdf>
