@@ -95,15 +95,17 @@ Windows (script Python + QGC)  <--- MAVLink qua UDP --->  Container Docker (PX4 
 
 ### 2.4. Cấu trúc file đang có
 
-Trên Windows, thư mục `D:\Intern iVista\UAV\mavsdk`:
+Đã chuyển hết vào repo này (trước đây nằm ở `D:\Intern iVista\UAV\mavsdk`). Script nằm trong thư mục `scripts/`:
 
 | File | Nội dung |
 |---|---|
-| `buoc1_cat_canh.py` | Bài 1: kết nối, cất cánh 10 m, hạ cánh |
-| `buoc2_tha_phao_tu_dong.py` | Bài 2: bay plan thả phao và tự nhả móc khi tới lệnh Gripper Action |
-| `tha_phao_muc1.plan` | Plan QGC cho mission thả phao (đặt cạnh script để bài 2 đọc được) |
-| `buoc3_offboard.py` | Bài 3: thí nghiệm offboard A/B/C (lệnh vận tốc) |
-| `kien_thuc_drone_bam_muc_tieu.md` | Ghi chú kiến thức chi tiết (có thể đã nằm trong `docs/` của repo) |
+| `scripts/buoc1_cat_canh.py` | Bài 1: kết nối, cất cánh 10 m, hạ cánh |
+| `scripts/buoc2_tha_phao_tu_dong.py` | Bài 2: bay plan thả phao và tự nhả móc khi tới lệnh Gripper Action |
+| `scripts/tha_phao_muc1.plan` | Plan QGC cho mission thả phao (đặt cạnh script để bài 2 đọc được; chạy bài 2 từ trong thư mục `scripts/`) |
+| `scripts/buoc3_offboard.py` | Bài 3: thí nghiệm offboard A/B/C (lệnh vận tốc) |
+| `scripts/buoc4_p_controller.py` | Bài 4: bộ điều khiển P bám mục tiêu ảo đi thẳng |
+| `kien_thuc_drone_bam_muc_tieu.md` và `docs/` | Ghi chú kiến thức (mục lục ở file gốc, chi tiết trong `docs/`) |
+| `requirements.txt` | Các gói Python cần cài vào `.venv` |
 
 Trong WSL Ubuntu: `~/phao/model.sdf` (mô hình phao), `~/phao/chay_gpu.sh` (script chạy sim).
 Plan gốc còn lưu ở `Documents\QGroundControl\Missions`.
@@ -111,7 +113,16 @@ Plan gốc còn lưu ở `Documents\QGroundControl\Missions`.
 ### 2.5. Cách chạy script
 
 ```powershell
-(.venv) PS D:\Intern iVista\UAV\mavsdk> python buoc3_offboard.py A
+# Lần đầu: tạo môi trường ảo trong repo và cài gói
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+
+# Chạy script từ thư mục gốc của repo
+(.venv) PS D:\Intern iVista\UAV\uav-target-following> python scripts\buoc3_offboard.py A
+
+# Riêng bài 2 (đọc file plan theo thư mục đang đứng) phải chạy từ trong scripts/
+(.venv) PS D:\Intern iVista\UAV\uav-target-following\scripts> python buoc2_tha_phao_tu_dong.py
 ```
 
 Điều kiện: **sim đang chạy** và QGC đang mở. Nên **khởi động lại sim giữa các lần thí nghiệm** để vị trí bắt đầu lại từ (0, 0) và dễ so sánh.
